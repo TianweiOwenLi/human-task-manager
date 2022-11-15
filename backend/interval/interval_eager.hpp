@@ -5,7 +5,9 @@
 #include <string>
 #include <ostream>
 #include <shared_mutex>
-#include "be_macro.hpp"
+
+#include "interval_types.hpp"
+#include "interval_eager.hpp"
 
 class EagerIntervalSeq {
     std::vector<minute_interval> data;

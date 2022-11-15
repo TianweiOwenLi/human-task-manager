@@ -1,40 +1,19 @@
 #include <iostream>
 #include <sstream>
 #include <assert.h>
-#include <set>
-#include <map>
-#include <unordered_set>
-#include <unordered_map>
 #include <stack>
-#include <queue>
-#include <list>
 #include <vector>
-#include <bitset>
-#include <random>
-#include <algorithm>
-#include <functional>
 #include <chrono>
 #include <string>
 #include <shared_mutex>
-using std::cin;
-using std::cout;
-using std::endl;
 using std::vector;
 using std::stack;
-using std::queue;
-using std::pair;
-using std::unordered_set;
-using std::unordered_map;
-using std::multimap;
-using std::function;
-using std::min;
-using std::max;
 #define dbg(x) std::cout<<#x<<" = "<<x<<'\n'
 #define mp(x,y) std::make_pair(x,y)
 
 using namespace std::chrono;
 
-#include "be_macro.hpp"
+#include "interval_types.hpp"
 #include "interval_eager.hpp"
 
 
@@ -47,9 +26,9 @@ void EagerIntervalSeq::extend(const minute_interval iv) {
     if (data.empty() || data.back().end < iv.start) {
         data.push_back(iv);
     } else if (data.back().start <= iv.start) {
-        data.back() = {data.back().start, max(data.back().end, iv.end)};
+        data.back() = {data.back().start, std::max(data.back().end, iv.end)};
     } else { // O(n) expensive case, unavoidable when pt.
-        stack<minute_interval> tail;
+        std::stack<minute_interval> tail;
         while (!data.empty() && data.back().start > iv.start) {
             tail.push(data.back());
             data.pop_back();
