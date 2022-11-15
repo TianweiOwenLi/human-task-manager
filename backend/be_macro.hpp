@@ -14,8 +14,8 @@ typedef struct {
 } pattern;
 
 typedef struct {
-    minutes start;
-    minutes end;
+    long start;
+    long end;
 } minute_interval;
 
 #endif // BACKEND_MACRO
